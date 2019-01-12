@@ -31,7 +31,8 @@ namespace DungeonMap
         private ResourceLoader resources;
         private HttpClient client;
         private AppUser appUser;
-        private JsonHelper<GameModel> requestJsonHelper;
+        private JsonHelper<GameModel> gameModelJsonHelper;
+        private JsonHelper<CharacterModel> charJsonHelper;
         private GameModel model;
 
         public IEnumerable<IdNamePair> FriendsCharacters { get; set; }
@@ -41,6 +42,8 @@ namespace DungeonMap
             model = new GameModel();
             resources = ResourceLoader.GetForCurrentView();
             appUser = AppUser.Instance;
+            charJsonHelper = new JsonHelper<CharacterModel>();
+            gameModelJsonHelper = new JsonHelper<GameModel>();
 
             this.InitializeComponent();
         }
@@ -81,7 +84,7 @@ namespace DungeonMap
 
         private async void BtnCreate_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(tbGameName.Text)) 
+            if (String.IsNullOrWhiteSpace(tbGameName.Text))
             {
                 throw new Exception("Game Name is required");
             }
@@ -92,19 +95,61 @@ namespace DungeonMap
 
             model.Name = tbGameName.Text;
             model.IsActive = true;
+            model.Characters.Add(new CharacterModel()
+            {
+                CharacterName = "DM",
+                RoleType = RoleType.GameMaster,
+                UserId = appUser.UserId.Value
+            });
 
-            var httpClient = new HttpClient();
+            //Set up http client to send new game.
+            client = client ?? new HttpClient();
+
+            var request = new HttpRequestMessage();
+            request.RequestUri = new Uri(resources.GetString("BaseUri") + $"api/games");
+            request.Method = HttpMethod.Post;
+            request.Headers.Add("Authorization", $"Bearer {appUser.Token}");
+
+            request.Content = new StringContent(gameModelJsonHelper.ConvertToJson(model));
+
+            var response = await client.SendAsync(request);
+
+            var responseBody = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Error: {responseBody}");
+            }
+
+            Frame.Navigate(typeof(GamesListView));
+        }
+
+        private async void CbPlayers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            model.Characters = model.Characters ?? new List<CharacterModel>();
+
+            client = client ?? new HttpClient();
 
             var request = new HttpRequestMessage();
             request.RequestUri = new Uri(resources.GetString("BaseUri") + $"api/characters/users/{appUser.UserId}");
             request.Headers.Add("Authorization", $"Bearer {appUser.Token}");
 
-            var response = await httpClient.SendAsync(request);
+            var response = await client.SendAsync(request);
 
             var responseBody = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode == false)
+            {
+                throw new Exception($"Error: {responseBody}");
+            }
 
+            model.Characters.Add(charJsonHelper.ConvertToModel(responseBody));
+        }
 
+        private void BtnRemove_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var btn = sender as SymbolIcon;
 
+            var character = model.Characters.Single(ch => ch.Id == (int)btn.DataContext);
+            model.Characters.Remove(character);
         }
     }
 }
