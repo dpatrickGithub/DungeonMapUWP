@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="DungeonMap.MainPage"
+    x:Class="DungeonMap.UserView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DungeonMap"
@@ -9,6 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="64,29,0,0" Text="User View" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <InkCanvas x:Name="inkCanvas"/>
 
     </Grid>
 </Page>

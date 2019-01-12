@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="DungeonMap.CreateNewGameView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DungeonMap"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock x:Name="Heading" Text="Create New Game" HorizontalAlignment="Center" Margin="0,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72"/>
+        <TextBlock Text="Game Type:" Margin="0,293,923,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="31" />
+        <ComboBox Name="cbGameType" HorizontalAlignment="Left" Margin="606,283,0,0" VerticalAlignment="Top" IsTextSearchEnabled="False" Width="432" SelectionChanged="DdGameType_SelectionChanged" Height="50">
+            <ComboBox.Items>
+                <ComboBoxItem Name="dnd5e" Content="Dungeons And Dragons 5th Edition" />
+                <ComboBoxItem Name="dnd4e" Content="Dungeons And Dragons 4th Edition" />
+                <ComboBoxItem Name="dnd3_5e" Content="Dungeons And Dragons 3.5th Edition" />
+                <ComboBoxItem Name="dnd3e" Content="Dungeons And Dragons 3rd Edition" />
+                <ComboBoxItem Name="adnd2e" Content="Advanced Dungeons And Dragons 2nd Edition" />
+                <ComboBoxItem Name="adnd1e" Content="Advanced Dungeons And Dragons 1st Edition" />
+                <ComboBoxItem Name="dnd1e" Content="Dungeons And Dragons 1st Edition" />
+                <ComboBoxItem Name="pathfinder" Content="Pathfinder" />
+            </ComboBox.Items>
+        </ComboBox>
+        <TextBlock Margin="0,376,923,0" Text="Game Name:" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="31"/>
+        <TextBox Name="tbGameName" HorizontalAlignment="Left" Margin="606,367,0,0" PlaceholderText="Game Name" VerticalAlignment="Top" Width="432" Height="49"/>
+        <TextBlock HorizontalAlignment="Left" Margin="467,458,0,0" Text="Players:" TextWrapping="Wrap" VerticalAlignment="Top" Width="129" Height="31"/>
+        <ComboBox Name="cbPlayers" HorizontalAlignment="Left" Margin="606,450,0,0" IsTextSearchEnabled="False" VerticalAlignment="Top" Width="432" ItemsSource="{x:Bind FriendsCharacters}" DisplayMemberPath="Name" Height="50"/>
+        <Button Name="btnCreate" Content="Create" HorizontalAlignment="Center" Margin="0,561,0,0" VerticalAlignment="Top" Height="55" Width="160" Click="BtnCreate_Click" />
+
+    </Grid>
+</Page>

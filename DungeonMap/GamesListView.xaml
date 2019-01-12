@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="DungeonMap.GamesListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DungeonMap"
+    xmlns:data="using:DungeonMap.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:Windows10version1803="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 6)"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" Margin="0,95,0,0" Text="Active Games" TextWrapping="Wrap" VerticalAlignment="Top" Height="108" Width="974" FontSize="72" TextAlignment="Center"/>
+        <GridView HorizontalAlignment="Center" Height="574" VerticalAlignment="Center" Width="974" ItemsSource="{x:Bind Games, Mode=OneWay}" BorderBrush="Black" BorderThickness="1">
+            <GridView.Header>
+                <GridViewHeaderItem >
+                    <StackPanel Height="50" Orientation="Horizontal" Spacing="153">
+                        <TextBlock Text="Name" />
+                        <TextBlock Text="Game Type" />
+                        <TextBlock Text="Characters" />
+                        <TextBlock Text="Active" />
+                        <TextBlock Text="Play"/>
+                    </StackPanel>
+                </GridViewHeaderItem>
+            </GridView.Header>
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="data:GameModel">
+                    <StackPanel Height="30">
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
+                            <TextBlock Text="{x:Bind Name}" HorizontalAlignment="Center" />
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
+                            <TextBlock Text="{x:Bind GameType}" HorizontalAlignment="Center" />
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
+                            <TextBlock Text="{x:Bind Characters[0].CharacterName}" HorizontalAlignment="Center" />
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
+                            <CheckBox IsChecked="{x:Bind IsActive}"  HorizontalAlignment="Center" Content="Active" IsEnabled="False" />
+                        </Border>
+                        <Border>
+                            <Button Name="{x:Bind Id}" DataContext="{x:Bind Characters[0]}" Content="Play Game" HorizontalAlignment="Center" Height="25" Width="50" Click="BtnOpenGame_Click" />
+                        </Border>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+        <Button Content="Create Game" HorizontalAlignment="Center" Margin="0,856,0,0" VerticalAlignment="Top" Height="52" Width="121" Name="btnCreateNewGame" Click="BtnCreateNewGame_Click" />
+        <NavigationView Name="nvNavigation" 
+                        HorizontalAlignment="Left" 
+                        IsPaneToggleButtonVisible="false"  
+                        Windows10version1809:PaneDisplayMode="Left" 
+                        IsSettingsVisible="false" 
+                        VerticalAlignment="Center" 
+                        Width="180" 
+                        Height="1000" 
+                        Margin="0,0,0,0" 
+                        ItemInvoked="NvNavigation_ItemInvoked" 
+                        Windows10version1803:IsBackButtonVisible="Collapsed" >
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Characters" Icon="People" Tag="Characters" />
+                <NavigationViewItem Content="Games" Icon="SelectAll" Tag="Games" IsEnabled="false" />
+                <NavigationViewItem Content="Settings" Icon="Setting" Tag="Settings" />
+            </NavigationView.MenuItems>
+        </NavigationView>
+    </Grid>
+</Page>

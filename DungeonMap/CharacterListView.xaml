@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="DungeonMap.CharacterListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DungeonMap"
+    xmlns:data="using:DungeonMap.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Windows10version1803="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 6)"
+    xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" Margin="0,95,0,0" Text="Active Characters" TextWrapping="Wrap" VerticalAlignment="Top" Height="108" Width="974" FontSize="72" TextAlignment="Center"/>
+        <GridView HorizontalAlignment="Center" Height="574" VerticalAlignment="Center" Width="974" ItemsSource="{x:Bind Characters, Mode=OneWay}" BorderBrush="Black" BorderThickness="1">
+            <GridView.Header>
+                <GridViewHeaderItem >
+                    <StackPanel Height="50" Orientation="Horizontal" Spacing="379">
+                        <TextBlock Text="Name" />
+                        <TextBlock Text="Role Type" />
+                        <TextBlock Text="Game" />
+                    </StackPanel>
+                </GridViewHeaderItem>
+            </GridView.Header>
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="data:CharacterModel">
+                    <StackPanel Height="30">
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
+                            <TextBlock Text="{x:Bind CharacterName}" HorizontalAlignment="Center" />
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
+                            <TextBlock Text="{x:Bind RoleType}" HorizontalAlignment="Center" />
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
+                            <TextBlock Text="{x:Bind GameId}"  HorizontalAlignment="Center" />
+                        </Border>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+        <Button Content="Create Character" HorizontalAlignment="Center" Margin="0,856,0,0" VerticalAlignment="Top" Height="52" Width="121" Name="btnCreateNewCharacter" Click="BtnCreateNewCharacter_Click" />
+        <NavigationView Name="nvNavigation" 
+                        HorizontalAlignment="Left" 
+                        IsPaneToggleButtonVisible="false"  
+                        Windows10version1809:PaneDisplayMode="Left" 
+                        IsSettingsVisible="false" 
+                        VerticalAlignment="Center" 
+                        Width="180" 
+                        Height="1000" 
+                        Margin="0,0,0,0" 
+                        ItemInvoked="NvNavigation_ItemInvoked" 
+                        Windows10version1803:IsBackButtonVisible="Collapsed" >
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Characters" Icon="People" Tag="Characters" IsEnabled="false" />
+                <NavigationViewItem Content="Games" Icon="SelectAll" Tag="Games" />
+                <NavigationViewItem Content="Settings" Icon="Setting" Tag="Settings" />
+            </NavigationView.MenuItems>
+        </NavigationView>
+    </Grid>
+</Page>

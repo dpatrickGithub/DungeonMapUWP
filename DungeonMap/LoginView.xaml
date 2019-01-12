@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="DungeonMap.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DungeonMap"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="541,268,0,0" Text="Dungeon Map" TextWrapping="Wrap" VerticalAlignment="Top" Height="125" Width="467" FontSize="72"/>
+        <TextBox Name="tbUserName" HorizontalAlignment="Left" Margin="541,431,0,0" PlaceholderText="Username" VerticalAlignment="Top" Width="458" Height="38" FontSize="16"/>
+        <PasswordBox Name="pbPassword" HorizontalAlignment="Left" Margin="541,500,0,0" PlaceholderText="Password"  VerticalAlignment="Top" Width="458" Height="38" FontSize="16"/>
+        <Button Name="btnSignIn" Content="Sign In" HorizontalAlignment="Left" Height="56" Margin="580,567,0,0" VerticalAlignment="Top" Width="132" Click="BtnSignIn_Click"/>
+        <Button Name="btnRegister" Content="Register" HorizontalAlignment="Left" Height="56" Margin="826,567,0,0" VerticalAlignment="Top" Width="132" Click="BtnRegister_Click" />
+    </Grid>
+</Page>
