@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -37,46 +38,6 @@ namespace DungeonMap
             requestHelper = new JsonHelper<RegisterUserModel>();
         }
 
-        private void TbUsername_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (Validate())
-            {
-                btnRegister.IsEnabled = true;
-            }
-        }
-
-        private void PbPassword_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (Validate())
-            {
-                btnRegister.IsEnabled = true;
-            }
-        }
-
-        private void TbEmail_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (Validate())
-            {
-                btnRegister.IsEnabled = true;
-            }
-        }
-
-        private void TbFirstName_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (Validate())
-            {
-                btnRegister.IsEnabled = true;
-            }
-        }
-
-        private void TbLastName_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (Validate())
-            {
-                btnRegister.IsEnabled = true;
-            }
-        }
-
         private async void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
             if (!Validate())
@@ -103,7 +64,7 @@ namespace DungeonMap
                 var request = new HttpRequestMessage();
                 request.RequestUri = new Uri(resources.GetString("BaseUri") + "api/auth/register");
                 request.Method = HttpMethod.Post;
-                request.Content = new StringContent(requestHelper.ConvertToJson(requestBody));
+                request.Content = new StringContent(requestHelper.ConvertToJson(requestBody), Encoding.UTF8, "application/json");
 
                 var response = await client.SendAsync(request);
                 

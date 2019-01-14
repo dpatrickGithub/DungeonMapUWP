@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -79,7 +80,7 @@ namespace DungeonMap
             request.RequestUri = new Uri(resources.GetString("BaseUri") + $"api/characters");
             request.Method = HttpMethod.Post;
             request.Headers.Add("Authorization", $"Bearer {appUser.Token}");
-            request.Content = new StringContent(charJsonHelper.ConvertToJson(model));
+            request.Content = new StringContent(charJsonHelper.ConvertToJson(model), Encoding.UTF8, "application/json");
 
             var response = await client.SendAsync(request);
 

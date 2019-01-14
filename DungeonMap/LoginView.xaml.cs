@@ -46,7 +46,7 @@ namespace DungeonMap
         
         private async void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            if (!validator.ValidateUserName(tbUserName.Text) || validator.ValidatePassword(pbPassword.Password))
+            if (!validator.ValidateUserName(tbUserName.Text) || !validator.ValidatePassword(pbPassword.Password))
             {
                 throw new Exception("Username or password does not meet length requirements.");
             }
@@ -56,7 +56,7 @@ namespace DungeonMap
             using (var client = new HttpClient())
             {
                 var requestMessage = new HttpRequestMessage();
-                requestMessage.RequestUri = new Uri(resources.GetString("BaseUri") + "token");
+                requestMessage.RequestUri = new Uri(resources.GetString("BaseUri") + "api/auth/token");
                 requestMessage.Method = HttpMethod.Post;
 
                 var model = new LoginModel()
@@ -65,7 +65,7 @@ namespace DungeonMap
                     Password = pbPassword.Password
                 };
 
-                requestMessage.Content = new StringContent(requestJsonHelper.ConvertToJson(model));
+                requestMessage.Content = new StringContent(requestJsonHelper.ConvertToJson(model), Encoding.UTF8, "application/json");
 
                 response = await client.SendAsync(requestMessage);
             }
@@ -91,7 +91,7 @@ namespace DungeonMap
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(RegisterView));
         }
     }
 }

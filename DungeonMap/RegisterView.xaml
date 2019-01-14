@@ -10,16 +10,16 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Center" Margin="0,104,0,0" Text="Register" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72"/>
-        <TextBox Name="tbUsername" HorizontalAlignment="Left" Margin="206,236,0,0" PlaceholderText="Username" VerticalAlignment="Top" Width="480" LostFocus="TbUsername_LostFocus"/>
-        <PasswordBox Name="pbPassword" HorizontalAlignment="Left" Margin="206,306,0,0" PlaceholderText="Password" VerticalAlignment="Top" Width="480" LostFocus="PbPassword_LostFocus" />
-        <TextBox Name="tbEmail" HorizontalAlignment="Left" Margin="206,434,0,0" PlaceholderText="Email" VerticalAlignment="Top" Width="480" LostFocus="TbEmail_LostFocus"/>
-        <TextBox Name="tbFirstName"  HorizontalAlignment="Left" Margin="206,500,0,0" PlaceholderText="First Name" VerticalAlignment="Top" Width="480" LostFocus="TbFirstName_LostFocus" />
-        <TextBox Name="tbLastName" HorizontalAlignment="Left" Margin="206,565,0,0" PlaceholderText="Last Name" VerticalAlignment="Top" Width="480" LostFocus="TbLastName_LostFocus" />
+        <TextBox Name="tbUsername" HorizontalAlignment="Left" Margin="206,236,0,0" PlaceholderText="Username" VerticalAlignment="Top" Width="480" />
+        <PasswordBox Name="pbPassword" HorizontalAlignment="Left" Margin="206,306,0,0" PlaceholderText="Password" VerticalAlignment="Top" Width="480"  />
         <PasswordBox Name="pbConfirmPassword" HorizontalAlignment="Left" Margin="206,372,0,0" PlaceholderText="Confirm Password" VerticalAlignment="Top" Width="480"/>
+        <TextBox Name="tbEmail" HorizontalAlignment="Left" Margin="206,434,0,0" PlaceholderText="Email" VerticalAlignment="Top" Width="480" />
+        <TextBox Name="tbFirstName"  HorizontalAlignment="Left" Margin="206,500,0,0" PlaceholderText="First Name" VerticalAlignment="Top" Width="480" />
+        <TextBox Name="tbLastName" HorizontalAlignment="Left" Margin="206,565,0,0" PlaceholderText="Last Name" VerticalAlignment="Top" Width="480" />
         <TextBox Name="tbSkypeHandle" HorizontalAlignment="Left" Margin="801,236,0,0" PlaceholderText="Skype Handle" VerticalAlignment="Top" Width="480"/>
         <TextBox Name="tbPhone" HorizontalAlignment="Left" Margin="801,306,0,0" PlaceholderText="Phone Number" VerticalAlignment="Top" Width="480"/>
         <TextBox Name="tbCharacterName" HorizontalAlignment="Left" Margin="801,372,0,0" PlaceholderText="Preferred Character Name" VerticalAlignment="Top" Width="480"/>
         <TextBox Name="tbBiography" HorizontalAlignment="Left" Margin="801,434,0,0" PlaceholderText="Biography" VerticalAlignment="Top" Width="480" Height="163"/>
-        <Button Name="btnRegister" IsEnabled="False" Content="Register" HorizontalAlignment="Center" Margin="0,662,0,0" VerticalAlignment="Top" Height="55" Width="141" Click="BtnRegister_Click"/>
+        <Button Name="btnRegister" Content="Register" HorizontalAlignment="Center" Margin="0,662,0,0" VerticalAlignment="Top" Height="55" Width="141" Click="BtnRegister_Click"/>
     </Grid>
 </Page>
