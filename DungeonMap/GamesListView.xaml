@@ -27,21 +27,21 @@
             </GridView.Header>
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:GameModel">
-                    <StackPanel Height="30">
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
-                            <TextBlock Text="{x:Bind Name}" HorizontalAlignment="Center" />
+                    <StackPanel Height="150" Width="974" HorizontalAlignment="Left">
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0" HorizontalAlignment="Left" >
+                            <TextBlock Text="{x:Bind Name}" HorizontalAlignment="Left" />
                         </Border>
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
-                            <TextBlock Text="{x:Bind GameType}" HorizontalAlignment="Center" />
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0" HorizontalAlignment="Left" >
+                            <TextBlock Text="{x:Bind GameType}" HorizontalAlignment="Left" />
                         </Border>
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
-                            <TextBlock Text="{x:Bind Characters[0].CharacterName}" HorizontalAlignment="Center" />
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0" HorizontalAlignment="Left" >
+                            <TextBlock Text="{x:Bind Characters[0].CharacterName}" HorizontalAlignment="Left" />
                         </Border>
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
-                            <CheckBox IsChecked="{x:Bind IsActive}"  HorizontalAlignment="Center" Content="Active" IsEnabled="False" />
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0" HorizontalAlignment="Left" >
+                            <CheckBox IsChecked="{x:Bind IsActive}" HorizontalAlignment="Left" Content="Active" IsEnabled="False" />
                         </Border>
-                        <Border>
-                            <Button Name="{x:Bind Id}" DataContext="{x:Bind Characters[0]}" Content="Play Game" HorizontalAlignment="Center" Height="25" Width="50" Click="BtnOpenGame_Click" />
+                        <Border BorderBrush="Black" BorderThickness="1 1 0 0" HorizontalAlignment="Left">
+                            <Button Name="{x:Bind Id}" DataContext="{x:Bind Characters[0]}" Content="Play Game" Height="25" Width="50" Click="BtnOpenGame_Click" />
                         </Border>
                     </StackPanel>
                 </DataTemplate>
