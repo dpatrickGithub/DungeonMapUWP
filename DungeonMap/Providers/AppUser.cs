@@ -19,17 +19,19 @@ namespace DungeonMap.Providers
 
         public static AppUser Instance { get { return lazy.Value; } }
 
+        private int? userId;
+
         public int? UserId {
             get
             {
-                return UserId;
+                return userId;
             }
             set
             {
                 // allows for one first time only setting of user id property. 
-                if (!UserId.HasValue && value.HasValue)
+                if (!userId.HasValue && value.HasValue)
                 {
-                    UserId = value;
+                    userId = value;
                 }
             }
         }
