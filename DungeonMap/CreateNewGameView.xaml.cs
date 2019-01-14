@@ -43,7 +43,7 @@ namespace DungeonMap
             model = new GameModel();
             model.Characters = new List<CharacterModel>();
 
-            resources = ResourceLoader.GetForCurrentView();
+            resources = ResourceLoader.GetForCurrentView("AppResources");
             appUser = AppUser.Instance;
 
             friendsCharJsonHelper = new JsonHelper<List<IdNamePair>>();

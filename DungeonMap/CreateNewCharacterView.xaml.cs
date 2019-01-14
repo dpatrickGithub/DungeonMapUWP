@@ -40,7 +40,7 @@ namespace DungeonMap
         public CreateNewCharacterView()
         {
             model = new CharacterModel();
-            resources = ResourceLoader.GetForCurrentView();
+            resources = ResourceLoader.GetForCurrentView("AppResources");
             client = new HttpClient();
             appUser = AppUser.Instance;
             charJsonHelper = new JsonHelper<CharacterModel>();

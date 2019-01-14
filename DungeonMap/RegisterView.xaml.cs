@@ -33,7 +33,7 @@ namespace DungeonMap
         public RegisterView()
         {
             this.InitializeComponent();
-            resources = ResourceLoader.GetForCurrentView();
+            resources = ResourceLoader.GetForCurrentView("AppResources");
             requestHelper = new JsonHelper<RegisterUserModel>();
         }
 

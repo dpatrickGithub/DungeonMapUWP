@@ -38,7 +38,7 @@ namespace DungeonMap
         public Login()
         {
             this.InitializeComponent();
-            resources = ResourceLoader.GetForCurrentView();
+            resources = ResourceLoader.GetForCurrentView("AppResources");
             validator = new LoginValidator();
             requestJsonHelper = new JsonHelper<LoginModel>();
             responseJsonHelper = new JsonHelper<TokenModel>();

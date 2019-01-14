@@ -39,7 +39,7 @@ namespace DungeonMap
             _appUser = AppUser.Instance;
             jsonHelper = new JsonHelper<List<CharacterModel>>();
 
-            _resources = ResourceLoader.GetForCurrentView();
+            _resources = ResourceLoader.GetForCurrentView("AppResources");
 
             // TODO: Wrap httpclient in a helper and use an HttpClientFactory for generation.
 
