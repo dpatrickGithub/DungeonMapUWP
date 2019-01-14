@@ -33,17 +33,38 @@ namespace DungeonMap
         private AppUser appUser;
         private JsonHelper<GameModel> gameModelJsonHelper;
         private JsonHelper<CharacterModel> charJsonHelper;
+        private JsonHelper<List<IdNamePair>> friendsCharJsonHelper;
         private GameModel model;
 
-        public IEnumerable<IdNamePair> FriendsCharacters { get; set; }
+        public List<IdNamePair> FriendsCharacters { get; set; }
 
         public CreateNewGameView()
         {
             model = new GameModel();
+            model.Characters = new List<CharacterModel>();
+
             resources = ResourceLoader.GetForCurrentView();
             appUser = AppUser.Instance;
-            charJsonHelper = new JsonHelper<CharacterModel>();
+
+            friendsCharJsonHelper = new JsonHelper<List<IdNamePair>>();
             gameModelJsonHelper = new JsonHelper<GameModel>();
+            charJsonHelper = new JsonHelper<CharacterModel>();
+
+            client = new HttpClient();
+
+            var request = new HttpRequestMessage();
+            request.RequestUri = new Uri(resources.GetString("BaseUri") + $"api/characters/users/{appUser.UserId}/friends");
+            request.Headers.Add("Authorization", $"Bearer {appUser.Token}");
+
+            var response = client.SendAsync(request).Result;
+
+            var responseBody = response.Content.ReadAsStringAsync().Result;
+            if (response.IsSuccessStatusCode == false)
+            {
+                throw new Exception($"Error: {responseBody}");
+            }
+
+            FriendsCharacters = friendsCharJsonHelper.ConvertToModel(responseBody);
 
             this.InitializeComponent();
         }
@@ -102,9 +123,7 @@ namespace DungeonMap
                 UserId = appUser.UserId.Value
             });
 
-            //Set up http client to send new game.
-            client = client ?? new HttpClient();
-
+            //Set up http client to send request to create new game.
             var request = new HttpRequestMessage();
             request.RequestUri = new Uri(resources.GetString("BaseUri") + $"api/games");
             request.Method = HttpMethod.Post;
@@ -125,30 +144,31 @@ namespace DungeonMap
 
         private async void CbPlayers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            model.Characters = model.Characters ?? new List<CharacterModel>();
+            var selectedItem = cbPlayers.SelectedItem as TextBlock;
 
-            client = client ?? new HttpClient();
-
+            // Set up http client to send request to get full character details. 
             var request = new HttpRequestMessage();
-            request.RequestUri = new Uri(resources.GetString("BaseUri") + $"api/characters/users/{appUser.UserId}");
+            request.RequestUri = new Uri(resources.GetString("BaseUri") + $"api/characters/{Convert.ToInt32(selectedItem.DataContext)}");
             request.Headers.Add("Authorization", $"Bearer {appUser.Token}");
 
             var response = await client.SendAsync(request);
 
             var responseBody = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode == false)
+            if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"Error: {responseBody}");
             }
 
             model.Characters.Add(charJsonHelper.ConvertToModel(responseBody));
+
+            cbPlayers.SelectedItem = null;
         }
 
         private void BtnRemove_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var btn = sender as SymbolIcon;
 
-            var character = model.Characters.Single(ch => ch.Id == (int)btn.DataContext);
+            var character = model.Characters.FirstOrDefault(ch => ch.Id == (int)btn.DataContext);
             model.Characters.Remove(character);
         }
     }

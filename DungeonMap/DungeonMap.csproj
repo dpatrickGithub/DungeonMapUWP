@@ -123,6 +123,7 @@
     <Compile Include="Models\Auth\TokenModel.cs" />
     <Compile Include="Models\CharacterModel.cs" />
     <Compile Include="Models\GameModel.cs" />
+    <Compile Include="Models\GameUserModel.cs" />
     <Compile Include="Models\Map\ColorModel.cs" />
     <Compile Include="Models\Map\InkPointModel.cs" />
     <Compile Include="Models\Map\InkStrokeModel.cs" />

@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DungeonMap"
     xmlns:m="using:DungeonMap.Models"
+    xmlns:c="using:DungeonMap.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -11,8 +12,8 @@
 
     <Grid>
         <TextBlock x:Name="Heading" Text="Create New Game" HorizontalAlignment="Center" Margin="0,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="72"/>
-        <TextBlock Text="Game Type:" Margin="0,293,915,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="31" />
-        <ComboBox Name="cbGameType" HorizontalAlignment="Left" Margin="606,283,0,0" VerticalAlignment="Top" IsTextSearchEnabled="False" Width="432" SelectionChanged="DdGameType_SelectionChanged" Height="50">
+        <TextBlock Text="Game Type:" Margin="0,275,918,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="111" Height="31" />
+        <ComboBox Name="cbGameType" HorizontalAlignment="Left" Margin="603,265,0,0" VerticalAlignment="Top" IsTextSearchEnabled="False" Width="435" SelectionChanged="DdGameType_SelectionChanged" Height="50">
             <ComboBox.Items>
                 <ComboBoxItem Name="dnd5e" Content="Dungeons And Dragons 5th Edition" />
                 <ComboBoxItem Name="dnd4e" Content="Dungeons And Dragons 4th Edition" />
@@ -24,13 +25,19 @@
                 <ComboBoxItem Name="pathfinder" Content="Pathfinder" />
             </ComboBox.Items>
         </ComboBox>
-        <TextBlock Margin="0,376,923,0" Text="Game Name:" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="31"/>
-        <TextBox Name="tbGameName" HorizontalAlignment="Left" Margin="606,367,0,0" PlaceholderText="Game Name" VerticalAlignment="Top" Width="432" Height="49"/>
-        <TextBlock HorizontalAlignment="Left" Margin="477,466,0,0" Text="Add Player:" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="31"/>
-        <ComboBox Name="cbPlayers" HorizontalAlignment="Left" Margin="606,450,0,0" IsTextSearchEnabled="False" VerticalAlignment="Top" Width="432" ItemsSource="{x:Bind FriendsCharacters}" DisplayMemberPath="Name" Height="50" SelectionChanged="CbPlayers_SelectionChanged"/>
-        <TextBlock HorizontalAlignment="Left" Margin="493,548,0,0" Text="Players:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock Margin="0,358,927,0" Text="Game Name:" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="31"/>
+        <TextBox Name="tbGameName" HorizontalAlignment="Left" Margin="603,349,0,0" PlaceholderText="Game Name" VerticalAlignment="Top" Width="435" Height="49"/>
+        <TextBlock HorizontalAlignment="Left" Margin="473,448,0,0" Text="Add Player:" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="31"/>
+        <ComboBox Name="cbPlayers" HorizontalAlignment="Left" Margin="603,432,0,0" IsTextSearchEnabled="False" VerticalAlignment="Top" Width="435" ItemsSource="{x:Bind FriendsCharacters}" DisplayMemberPath="Name" Height="50" SelectionChanged="CbPlayers_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="c:IdNamePair">
+                    <TextBlock Text="{x:Bind Name}" DataContext="{x:Bind Id}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock HorizontalAlignment="Left" Margin="489,530,0,0" Text="Players:" TextWrapping="Wrap" VerticalAlignment="Top" Width="56"/>
         <Button Name="btnCreate" Content="Create" HorizontalAlignment="Center" Margin="0,727,0,0" VerticalAlignment="Top" Height="55" Width="160" Click="BtnCreate_Click" />
-        <ListView HorizontalAlignment="Left" Height="148" Margin="606,539,0,0" VerticalAlignment="Top" Width="431" BorderBrush="Black" BorderThickness="1" ItemsSource="{x:Bind model.Characters}" >
+        <ListView HorizontalAlignment="Left" Height="148" Margin="603,521,0,0" VerticalAlignment="Top" Width="434" BorderBrush="Black" BorderThickness="1" ItemsSource="{x:Bind model.Characters}" >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="m:CharacterModel" >
                     <StackPanel >
