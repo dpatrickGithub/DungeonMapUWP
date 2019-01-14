@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DungeonMap.Models.Auth
 {
+    [DataContract]
+    [Serializable]
     public class TokenModel
     {
-        [DisplayName("access_token")]
+        [DataMember]
         public string Token { get; set; }
-
-        [DisplayName("user_id")]
+        [DataMember]
         public int UserId { get; set; }
     }
 }
