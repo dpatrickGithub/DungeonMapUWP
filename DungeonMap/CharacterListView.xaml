@@ -25,16 +25,10 @@
             </GridView.Header>
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:CharacterModel">
-                    <StackPanel Height="30">
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
-                            <TextBlock Text="{x:Bind CharacterName}" HorizontalAlignment="Center" />
-                        </Border>
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
-                            <TextBlock Text="{x:Bind RoleType}" HorizontalAlignment="Center" />
-                        </Border>
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0">
-                            <TextBlock Text="{x:Bind GameId}"  HorizontalAlignment="Center" />
-                        </Border>
+                    <StackPanel Height="30" Orientation="Horizontal" Spacing="350">
+                        <TextBlock Text="{x:Bind CharacterName}" HorizontalAlignment="Center" />
+                        <TextBlock Text="{x:Bind RoleType}" HorizontalAlignment="Center" />
+                        <TextBlock Text="{x:Bind GameName}"  HorizontalAlignment="Center" />
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>

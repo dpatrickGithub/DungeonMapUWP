@@ -13,36 +13,32 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Center" Margin="0,95,0,0" Text="Active Games" TextWrapping="Wrap" VerticalAlignment="Top" Height="108" Width="974" FontSize="72" TextAlignment="Center"/>
-        <GridView HorizontalAlignment="Center" Height="574" VerticalAlignment="Center" Width="974" ItemsSource="{x:Bind Games, Mode=OneWay}" BorderBrush="Black" BorderThickness="1">
+        <GridView BorderBrush="Black" 
+                  BorderThickness="1 1 1 1" 
+                  Width="974" 
+                  ItemsSource="{x:Bind Games, Mode=OneWay}" 
+                  Margin="263,219,263,185" 
+                  HorizontalAlignment="Stretch"
+                  Grid.Column="5">
             <GridView.Header>
                 <GridViewHeaderItem >
-                    <StackPanel Height="50" Orientation="Horizontal" Spacing="153">
-                        <TextBlock Text="Name" />
-                        <TextBlock Text="Game Type" />
-                        <TextBlock Text="Characters" />
-                        <TextBlock Text="Active" />
-                        <TextBlock Text="Play"/>
+                    <StackPanel Height="50" Orientation="Horizontal" Width="962" Spacing="153" Margin="0,0,0,0" VerticalAlignment="Stretch">
+                        <TextBlock Text="Name" HorizontalAlignment="Stretch" />
+                        <TextBlock Text="Game Type" HorizontalAlignment="Stretch" />
+                        <TextBlock Text="Characters" HorizontalAlignment="Stretch" />
+                        <TextBlock Text="Active" HorizontalAlignment="Stretch" />
+                        <TextBlock Text="Play" HorizontalAlignment="Stretch"/>
                     </StackPanel>
                 </GridViewHeaderItem>
             </GridView.Header>
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:GameModel">
-                    <StackPanel Height="150" Width="974" HorizontalAlignment="Left">
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0" HorizontalAlignment="Left" >
-                            <TextBlock Text="{x:Bind Name}" HorizontalAlignment="Left" />
-                        </Border>
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0" HorizontalAlignment="Left" >
-                            <TextBlock Text="{x:Bind GameType}" HorizontalAlignment="Left" />
-                        </Border>
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0" HorizontalAlignment="Left" >
+                    <StackPanel Height="50" Width="974" Orientation="Horizontal" HorizontalAlignment="Stretch" Spacing="120">
+                            <TextBlock Text="{x:Bind Name}" HorizontalAlignment="Left"  />
+                            <TextBlock Text="{x:Bind GameType}" HorizontalAlignment="Left"  />
                             <TextBlock Text="{x:Bind Characters[0].CharacterName}" HorizontalAlignment="Left" />
-                        </Border>
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0" HorizontalAlignment="Left" >
                             <CheckBox IsChecked="{x:Bind IsActive}" HorizontalAlignment="Left" Content="Active" IsEnabled="False" />
-                        </Border>
-                        <Border BorderBrush="Black" BorderThickness="1 1 0 0" HorizontalAlignment="Left">
-                            <Button Name="{x:Bind Id}" DataContext="{x:Bind Characters[0]}" Content="Play Game" Height="25" Width="50" Click="BtnOpenGame_Click" />
-                        </Border>
+                            <Button Name="{x:Bind Id}" DataContext="{x:Bind Characters[0]}" Content="Play Game" Height="40" Width="100" Click="BtnOpenGame_Click" />
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>

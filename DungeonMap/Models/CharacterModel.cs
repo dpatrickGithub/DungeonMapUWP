@@ -12,6 +12,7 @@ namespace DungeonMap.Models
         public int Id { get; set; }
         public RoleType RoleType { get; set; }
         public int GameId { get; set; }
+        public string GameName { get; set; }
         public int UserId { get; set; }
         public string CharacterName { get; set; }
     }
